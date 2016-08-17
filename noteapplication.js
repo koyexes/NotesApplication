@@ -1,23 +1,24 @@
-class NotesApplication{
-	constructor(){
+// note application class
+class NotesApplication {
+	constructor () {
 		this.notes = [];
 	}
 
 	add(note){
-		if(note instanceof Note){
+		if(note instanceof Note) {
 			this.notes.push(note);
 		}
 	
 	}
 	
-	listNotes(){
+	listNotes() {
 		var list = "";
 		
-		for (var i = 0; i < this.notes.length; i++){
+		for (var i = 0; i < this.notes.length; i++) {
 			
 			list = list + "Note ID: " + i + "\n";
 			list = list + this.notes[i].text + "\n";
-			list = list + "By Author " +  this.notes[i].author ;
+			list = list + "By Author " +  this.notes[i].author + "\n";
 		
 		}
 		
@@ -45,17 +46,18 @@ class NotesApplication{
 	}
 	
 	edit(note_id, new_content){
-		this.notes[note_id].createNote(new_content);
+		this.notes[note_id].setNote(new_content);
 	}
 }
 
+// note class
 class Note{
 	constructor(note_content, author){
 		this.text = note_content;
 		this.author = author;
 	}
 	
-	createNote(note_content){
+	setNote(note_content){
 		this.text = note_content;
 	}
 	
@@ -64,8 +66,8 @@ class Note{
 }
 
 
-var newNoteManager = new NotesApplication("Daniel Steel");
-var newNote = new Note("hello world");
+var newNoteManager = new NotesApplication();
+var newNote = new Note("hello world", "Daniel Steel");
 newNoteManager.add(newNote);
 newNoteManager.listNotes();
 newNoteManager.edit(0, "koyexes");
