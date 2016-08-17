@@ -1,13 +1,8 @@
 class NotesApplication{
-	constructor(author){
-		this.author = author;
+	constructor(){
 		this.notes = [];
 	}
-	
-	/*create(note_content){
-		this.notes.push(note_content);
-	}*/
-	
+
 	add(note){
 		if(note instanceof Note){
 			this.notes.push(note);
@@ -22,7 +17,7 @@ class NotesApplication{
 			
 			list = list + "Note ID: " + i + "\n";
 			list = list + this.notes[i].text + "\n";
-			list = list + "By Author " +  this.author ;
+			list = list + "By Author " +  this.notes[i].author ;
 		
 		}
 		
@@ -36,12 +31,11 @@ class NotesApplication{
 		
 	}
 	
-	searched(search_text){
+	search(search_text){
 		var foundList = "";
 		for(var i = 0; i < this.notes.length; i++){
-			var index = search_text.search(this.notes[i].text);
-			if( index > -1){
-				console.log(this.notes[i].text);	
+			if( this.notes[i].text.indexOf(search_text) > -1){
+				console.log(this.notes[i].text + "\n");	
 			}
 		}
 	}
@@ -51,16 +45,17 @@ class NotesApplication{
 	}
 	
 	edit(note_id, new_content){
-		this.notes[note_id].changeNote(new_content);
+		this.notes[note_id].createNote(new_content);
 	}
 }
 
 class Note{
-	constructor(note_content){
+	constructor(note_content, author){
 		this.text = note_content;
+		this.author = author;
 	}
 	
-	changeNote(note_content){
+	createNote(note_content){
 		this.text = note_content;
 	}
 	
@@ -75,4 +70,4 @@ newNoteManager.add(newNote);
 newNoteManager.listNotes();
 newNoteManager.edit(0, "koyexes");
 newNoteManager.listNotes();
-newNoteManager.searched("hello");
+newNoteManager.search("koyexes");
