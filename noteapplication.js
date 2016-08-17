@@ -51,16 +51,16 @@ class NotesApplication{
 	}
 	
 	edit(note_id, new_content){
-		this.notes[note_id].createNote(new_content);
+		this.notes[note_id].changeNote(new_content);
 	}
 }
 
 class Note{
-	constructor(){
-		this.text = "";
+	constructor(note_content){
+		this.text = note_content;
 	}
 	
-	createNote(note_content){
+	changeNote(note_content){
 		this.text = note_content;
 	}
 	
@@ -70,8 +70,7 @@ class Note{
 
 
 var newNoteManager = new NotesApplication("Daniel Steel");
-var newNote = new Note();
-newNote.createNote("hello world 1");
+var newNote = new Note("hello world");
 newNoteManager.add(newNote);
 newNoteManager.listNotes();
 newNoteManager.edit(0, "koyexes");
