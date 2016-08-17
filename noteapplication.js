@@ -4,8 +4,15 @@ class NotesApplication{
 		this.notes = [];
 	}
 	
-	create(note_content){
+	/*create(note_content){
 		this.notes.push(note_content);
+	}*/
+	
+	add(note){
+		if(note instanceof Note){
+			this.notes.push(note);
+		}
+	
 	}
 	
 	listNotes(){
@@ -13,8 +20,8 @@ class NotesApplication{
 		
 		for (var i = 0; i < this.notes.length; i++){
 			
-			list = list + "Note ID:" + i + "\n";
-			list = list + this.notes[i] + "\n";
+			list = list + "Note ID: " + i + "\n";
+			list = list + this.notes[i].text + "\n";
 			list = list + "By Author " +  this.author ;
 		
 		}
@@ -22,26 +29,51 @@ class NotesApplication{
 		console.log(list);
 	}
 	
-	getNot(note_id){
-		if(this.note.length > note_id){
+	get(note_id){
+		if((typeof note_id === "integer") && (this.note.length > note_id)){
 			return this.notes[note_id];
 		}
 		
 	}
 	
-	search(search_text){
-		
+	searched(search_text){
+		var foundList = "";
+		for(var i = 0; i < this.notes.length; i++){
+			var index = search_text.search(this.notes[i].text);
+			if( index > -1){
+				console.log(this.notes[i].text);	
+			}
+		}
 	}
 	
 	delete(note_id){
 		this.notes.splice(note_id,1);
 	}
+	
+	edit(note_id, new_content){
+		this.notes[note_id].createNote(new_content);
+	}
 }
 
-var newNote = new NotesApplication("Daniel Steel");
-newNote.create("hello world");
-newNote.create("hello world 2");
-newNote.create("hello world 3");
-console.log(newNote.listNotes());
-newNote.delete(0);
-console.log(newNote.listNotes());
+class Note{
+	constructor(){
+		this.text = "";
+	}
+	
+	createNote(note_content){
+		this.text = note_content;
+	}
+	
+	
+	
+}
+
+
+var newNoteManager = new NotesApplication("Daniel Steel");
+var newNote = new Note();
+newNote.createNote("hello world 1");
+newNoteManager.add(newNote);
+newNoteManager.listNotes();
+newNoteManager.edit(0, "koyexes");
+newNoteManager.listNotes();
+newNoteManager.searched("hello");
