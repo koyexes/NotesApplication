@@ -26,7 +26,7 @@ class NotesApplication {
 	}
 	
 	get (note_id) {
-		if ( (typeof note_id === "integer") && (this.note.length > note_id) ) {
+		if ( (typeof note_id === "number") && (this.notes.length > note_id) ) {
 			return this.notes[note_id];
 		}
 		
@@ -74,3 +74,4 @@ newNoteManager.listNotes();
 newNoteManager.edit(0, "koyexes");
 newNoteManager.listNotes();
 newNoteManager.search("koyexes");
+console.log(newNoteManager.get(0));
