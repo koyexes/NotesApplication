@@ -33,7 +33,6 @@ class NotesApplication {
 	}
 	
 	search (search_text) {
-		var foundList = "";
 		for (var i = 0; i < this.notes.length; i++) {
 			if( this.notes[i].text.indexOf(search_text) > -1) {
 				console.log(this.notes[i].text + "\n");	
@@ -53,7 +52,7 @@ class NotesApplication {
 }
 
 // note class
-class Note{
+class Note {
 	constructor (note_content, author) {
 		this.text = note_content;
 		this.author = author;
