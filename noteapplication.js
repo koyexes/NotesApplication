@@ -4,7 +4,7 @@ class NotesApplication {
 		this.notes = [];
 	}
 
-	add(note){
+	add (note) {
 		if(note instanceof Note) {
 			this.notes.push(note);
 		}
@@ -18,46 +18,48 @@ class NotesApplication {
 			
 			list = list + "Note ID: " + i + "\n";
 			list = list + this.notes[i].text + "\n";
-			list = list + "By Author " +  this.notes[i].author + "\n";
+			list = list + "By Author " +  this.notes[i].author + "\n\n";
 		
 		}
 		
 		console.log(list);
 	}
 	
-	get(note_id){
-		if((typeof note_id === "integer") && (this.note.length > note_id)){
+	get (note_id) {
+		if ( (typeof note_id === "integer") && (this.note.length > note_id) ) {
 			return this.notes[note_id];
 		}
 		
 	}
 	
-	search(search_text){
+	search (search_text) {
 		var foundList = "";
-		for(var i = 0; i < this.notes.length; i++){
-			if( this.notes[i].text.indexOf(search_text) > -1){
+		for (var i = 0; i < this.notes.length; i++) {
+			if( this.notes[i].text.indexOf(search_text) > -1) {
 				console.log(this.notes[i].text + "\n");	
+			}else{
+				console.log("No match found");
 			}
 		}
 	}
 	
-	delete(note_id){
-		this.notes.splice(note_id,1);
+	delete (note_id) {
+		this.notes.splice(note_id, 1);
 	}
 	
-	edit(note_id, new_content){
+	edit (note_id, new_content) {
 		this.notes[note_id].setNote(new_content);
 	}
 }
 
 // note class
 class Note{
-	constructor(note_content, author){
+	constructor (note_content, author) {
 		this.text = note_content;
 		this.author = author;
 	}
 	
-	setNote(note_content){
+	setNote (note_content) {
 		this.text = note_content;
 	}
 	
@@ -67,8 +69,8 @@ class Note{
 
 
 var newNoteManager = new NotesApplication();
-var newNote = new Note("hello world", "Daniel Steel");
-newNoteManager.add(newNote);
+newNoteManager.add(new Note("hello world", "Daniel Steel"));
+newNoteManager.add(new Note("i am a boy", "lengendary"));
 newNoteManager.listNotes();
 newNoteManager.edit(0, "koyexes");
 newNoteManager.listNotes();
